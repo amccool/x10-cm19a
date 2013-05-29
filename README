@@ -1,0 +1,44 @@
+X10 CM19A Kernel 2.6.35+ Driver
+by Michael LeMay
+
+* Please note that I am not affiliated with X10 in any way, nor is this driver.
+* X10 is a Registered Trademark of X10 Wireless Technology, Inc.
+* By using this software you agree to the terms of the license agreement contained within the file named LICENSE in the same directory as this file.
+
+This driver supports the X10 CM19A USB RF Transceiver.
+To install, simply follow these steps:
+
+1. Log in as 'root'
+2. make
+3. make install
+4. modprobe x10-cm19a
+
+Then, after plugging in your transceiver, you should see an entry such as /dev/cm19a0
+representing your device.  Type 'modinfo x10-cm19a.ko' to obtain information about
+supported module parameters.  To control your transceiver, format your commands as
+described by these regular expressions:
+
+[-+][a-p][01][1-9]
+
+For example:
+ - to turn on device c16: +c16
+ - to turn off device d8: -d8
+ - etc.
+
+[udlr][a-p]
+
+Ninja Pan'n'Tilt commands:
+ u = up
+ d = down
+ l = left
+ r = right
+
+[bs][a-p][01][0-9]
+Lamp module commands:
+ b = brighten
+ s = soften
+
+Enjoy!  Please send bug reports and patches to m at lemays dot org.
+
+Special thanks goes to Neil Cherry of the Linux HA project for providing initial
+USB interface code.

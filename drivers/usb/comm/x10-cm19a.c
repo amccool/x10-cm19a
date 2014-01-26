@@ -67,7 +67,7 @@
 #define usb_free_coherent usb_buffer_free
 #endif
 
-//#define DEBUG 0
+#define DEBUG 1
 
 #if DEBUG
 #define debug(sev, format, args...)					\
@@ -392,18 +392,20 @@ static int devf_release (struct inode *, struct file *);
 static struct file_operations FileOps = {
 	.read    = devf_read,
 	.write   = devf_write,
-	.readdir = devf_readdir,
+// not in kernel 3.12	.readdir = devf_readdir,
+	.iterate = devf_readdir,
 	.poll    = devf_poll,
 	.open    = devf_open,
 	.release = devf_release
 };
 
-// /** Recognized devices */
-// static __devinitdata struct usb_device_id DeviceTab[] = {
-	// { USB_DEVICE(0x0bc7, 0x0002) }, /* X10 CM19A */
-	// {}
-// };
-// MODULE_DEVICE_TABLE(usb, DeviceTab);
+ /** Recognized devices */
+ static __devinitdata struct usb_device_id DeviceTab[] = {
+ { USB_DEVICE(0x0bc7, 0x0002) }, /* X10 CM19A */
+ {}
+};
+
+ MODULE_DEVICE_TABLE(usb, DeviceTab);
 
 /* Define these values to match your devices */
 #define USB_SKEL_VENDOR_ID      0x0bc7
@@ -414,7 +416,7 @@ static const struct usb_device_id skel_table[] = {
         { USB_DEVICE(USB_SKEL_VENDOR_ID, USB_SKEL_PRODUCT_ID) },
         { }                                     /* Terminating entry */
 };
-MODULE_DEVICE_TABLE(usb, skel_table);
+//MODULE_DEVICE_TABLE(usb, skel_table);
 
 
 

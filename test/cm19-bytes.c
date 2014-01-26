@@ -44,7 +44,7 @@ main()
 	     printf("onoff %c, house %c, num %d\n", turnOn, house,num);
 	  }
 	
-/*	sleep(3); */
+	sleep(3); 
      }
    
   close(fh);
